@@ -113,3 +113,262 @@ main h1 { font-size:26px; margin-bottom:5px; }
 .grid-form input {
   width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; font-size:14px;
 }
+
+
+/* ================================
+   RESPONSIVE / MOBILE
+   ================================ */
+
+@media (max-width: 768px) {
+
+  /* Layout general */
+  .layout {
+    display: block;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    padding: 15px;
+    border-right: none;
+    border-bottom: 1px solid #e2e2e2;
+    display: block;
+  }
+
+  .logo {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .logo-sub {
+    font-size: 13px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .menu-item {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .sidebar-bottom {
+    display: flex;
+    gap: 15px;
+    margin-top: 12px;
+  }
+
+  .admin,
+  .salir {
+    border-top: none;
+    padding: 5px 0;
+    font-size: 13px;
+  }
+
+  /* MAIN */
+  main {
+    width: 100%;
+    max-width: none;
+    padding: 20px 15px;
+  }
+
+  main h1 {
+    font-size: 22px;
+  }
+
+  .subtitulo {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  /* BUSCADOR */
+  .buscador {
+    margin-bottom: 20px;
+  }
+
+  .buscador input {
+    padding: 13px 40px 13px 14px;
+    font-size: 14px;
+  }
+
+  /* PANTALLA INICIAL */
+  .pantalla-inicial {
+    padding: 30px 10px;
+  }
+
+  .lupa-circulo {
+    width: 65px;
+    height: 65px;
+    font-size: 27px;
+  }
+
+  /* TIENDAS */
+  .titulo-tiendas {
+    margin-top: 20px;
+  }
+
+  .tiendas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .tienda-card {
+    min-width: 0;
+    padding: 13px 8px;
+    font-size: 13px;
+  }
+
+  .tienda-card small {
+    font-size: 11px;
+  }
+
+  /* RESULTADO PRODUCTO */
+  .resultado-header {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .card {
+    padding: 15px;
+    gap: 15px;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+  }
+
+  .card-img {
+    width: 90px;
+    height: 125px;
+    border-radius: 8px;
+  }
+
+  .card-info {
+    min-width: 0;
+  }
+
+  .card-info h3 {
+    font-size: 15px;
+    margin-bottom: 7px;
+  }
+
+  .card-info p {
+    font-size: 12px;
+    margin: 4px 0;
+  }
+
+  /* DISPONIBILIDAD */
+  .card-disponibilidad {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .card-disponibilidad p {
+    font-size: 12px;
+  }
+
+  .card-disponibilidad input[type="number"] {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .btn-editar-stock {
+    padding: 8px;
+  }
+
+  /* CANTIDAD */
+  .cantidad-row {
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .cantidad-row button {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* BOTÓN VENDER */
+  .btn-vender {
+    padding: 11px 15px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  /* MENSAJES */
+  .msg-venta,
+  .msg-error {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  /* FORMULARIO */
+  .form-card {
+    max-width: none;
+    width: 100%;
+  }
+
+  .grid-form {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .grid-form input {
+    padding: 11px;
+    font-size: 14px;
+  }
+}
+
+
+/* ================================
+   TELÉFONOS MUY PEQUEÑOS
+   ================================ */
+
+@media (max-width: 400px) {
+
+  main {
+    padding: 15px 10px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .menu-item {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .tiendas {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    grid-template-columns: 75px 1fr;
+    padding: 12px;
+  }
+
+  .card-img {
+    width: 75px;
+    height: 105px;
+  }
+
+  .card-info h3 {
+    font-size: 14px;
+  }
+
+  .card-info p {
+    font-size: 11px;
+  }
+}
