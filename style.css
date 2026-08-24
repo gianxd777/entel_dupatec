@@ -1,0 +1,115 @@
+* { box-sizing: border-box; font-family: Arial, sans-serif; margin:0; padding:0; }
+body { background:#f4f6f9; color:#222; }
+
+.layout { display:flex; min-height:100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width:220px; background:#fff; border-right:1px solid #e2e2e2;
+  display:flex; flex-direction:column; justify-content:space-between; padding:20px 15px;
+}
+.logo { font-size:22px; font-weight:bold; color:#222; margin-bottom:30px; }
+.logo-e { color:#e8730c; }
+.logo-sub { color:#0057b8; font-size:15px; letter-spacing:1px; margin-top:2px; }
+.menu { display:flex; flex-direction:column; gap:8px; }
+.menu-item {
+  width:100%; text-align:left; padding:10px 12px; border:none; border-radius:6px;
+  background:#f0f2f5; color:#555; font-weight:bold; cursor:pointer; font-size:13px;
+}
+.menu-item.active { background:#eaf1fb; color:#0057b8; }
+.sidebar-bottom { font-size:14px; color:#444; }
+.admin, .salir { padding:10px 0; cursor:pointer; border-top:1px solid #eee; }
+
+/* MAIN */
+main { flex:1; padding:30px 40px; max-width:900px; }
+main h1 { font-size:26px; margin-bottom:5px; }
+.subtitulo { color:#777; margin-bottom:25px; font-size:14px; }
+.oculto { display:none; }
+
+.buscador { position:relative; margin-bottom:30px; }
+.buscador input {
+  width:100%; padding:14px 40px 14px 16px; font-size:15px;
+  border:1px solid #ccc; border-radius:8px;
+}
+.clear-icon { position:absolute; right:14px; top:14px; cursor:pointer; color:#999; }
+
+/* PANTALLA INICIAL / BUSCANDO */
+.pantalla-inicial { text-align:center; padding:40px 0; }
+.lupa-circulo {
+  width:80px; height:80px; background:#eaf1fb; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:32px;
+  margin:0 auto 15px;
+}
+.pantalla-inicial h2 { color:#222; font-size:18px; margin-bottom:5px; }
+.spinner {
+  width:50px; height:50px; border:4px solid #eaf1fb; border-top:4px solid #0057b8;
+  border-radius:50%; margin:0 auto 15px; animation:girar 0.8s linear infinite;
+}
+@keyframes girar { to { transform:rotate(360deg); } }
+
+/* TIENDAS RESUMEN */
+.titulo-tiendas { margin:30px 0 12px; font-size:15px; color:#333; }
+.tiendas { display:flex; gap:15px; flex-wrap:wrap; }
+.tienda-card {
+  flex:1; min-width:130px; padding:16px; border-radius:8px; color:#fff;
+  text-align:center; font-weight:bold; font-size:14px;
+}
+.tienda-card small { display:block; font-weight:normal; margin-top:6px; font-size:12px; opacity:0.9; }
+
+/* RESULTADO PRODUCTO */
+.resultado-header { color:#0057b8; font-weight:bold; text-align:center; margin-bottom:15px; font-size:14px; }
+.card {
+  background:#fff; border-radius:10px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom:20px; display:flex; gap:20px; flex-wrap:wrap;
+}
+.card-img {
+  width:130px; height:170px; background:#111; border-radius:10px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; color:#0af; font-size:12px;
+}
+.card-info { flex:1; min-width:180px; }
+.card-info h3 { margin-bottom:10px; font-size:17px; }
+.card-info p { margin:5px 0; font-size:14px; color:#333; }
+
+.card-disponibilidad {
+  background:#f7f9fc; border-radius:8px; padding:14px; min-width:200px; font-size:13px;
+}
+.card-disponibilidad p { margin:4px 0; }
+.card-disponibilidad b { color:#0057b8; }
+.card-disponibilidad .stock-num { color:#0057b8; font-weight:bold; font-size:15px; }
+.card-disponibilidad input[type=number] {
+  width:100%; padding:6px; border:1px solid #ccc; border-radius:6px; font-size:13px; margin-bottom:6px;
+}
+.card-disponibilidad label { font-size:11px; color:#666; display:block; }
+
+.btn-editar-stock {
+  background:none; border:1px solid #0057b8; color:#0057b8; border-radius:6px;
+  padding:6px 10px; font-size:12px; cursor:pointer; margin-top:8px; width:100%;
+}
+
+.cantidad-row { display:flex; align-items:center; gap:10px; margin-top:15px; }
+.cantidad-row button {
+  width:32px; height:32px; border:1px solid #ccc; background:#fff; border-radius:6px;
+  font-size:16px; cursor:pointer;
+}
+.cantidad-row span { font-weight:bold; font-size:16px; min-width:20px; text-align:center; }
+
+.btn-vender {
+  background:#0057b8; color:#fff; border:none; padding:10px 24px; border-radius:6px;
+  cursor:pointer; margin-top:15px; font-size:14px; font-weight:bold; width:100%;
+}
+.btn-vender.vendido { background:#1b8a3c; cursor:default; }
+.btn-vender:disabled { opacity:0.8; }
+
+.msg-venta {
+  background:#e6f7ea; color:#1b8a3c; border-radius:8px; padding:12px 16px;
+  margin-top:10px; font-size:13px; width:100%;
+}
+.msg-error { background:#fdecea; color:#c0392b; border-radius:8px; padding:12px 16px; margin-top:10px; font-size:13px; }
+
+/* FORMULARIO AGREGAR */
+.form-card { max-width:600px; }
+.grid-form { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:10px; }
+.grid-form label { font-size:13px; color:#555; display:block; margin-bottom:5px; }
+.grid-form input {
+  width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; font-size:14px;
+}

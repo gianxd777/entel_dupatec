@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Stock de Celulares - Dupatec</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-e">e</span> entel
+      <div class="logo-sub">DUPATEC</div>
+    </div>
+    <nav class="menu">
+      <button class="menu-item active" id="btnStock">📱 STOCK DE CELULARES</button>
+      <button class="menu-item" id="btnAgregar">➕ AGREGAR PRODUCTO</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="admin">👤 Administrador ▾</div>
+      <div class="salir">➜ Cerrar sesión</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- VISTA STOCK -->
+    <div id="vistaStock">
+      <h1>Stock de Celulares</h1>
+      <p class="subtitulo">Encuentra el celular que necesitas en nuestras tiendas</p>
+
+      <div class="buscador">
+        <input type="text" id="buscarInput" placeholder="Escribe el modelo que buscas...">
+        <span class="clear-icon oculto" id="clearBtn">✕</span>
+      </div>
+
+      <!-- Pantalla inicial (lupa) -->
+      <div id="pantallaInicial" class="pantalla-inicial">
+        <div class="lupa-circulo">🔍</div>
+        <h2>Busca tu celular</h2>
+      </div>
+
+      <!-- Buscando -->
+      <div id="pantallaBuscando" class="pantalla-inicial oculto">
+        <div class="spinner"></div>
+        <h2>Buscando...</h2>
+        <p class="subtitulo">Esto puede tardar unos segundos</p>
+      </div>
+
+      <!-- Resultados -->
+      <div id="resultados"></div>
+
+      <h3 class="titulo-tiendas">Nuestras tiendas</h3>
+      <div class="tiendas" id="tiendasResumen"></div>
+    </div>
+
+    <!-- VISTA AGREGAR -->
+    <div id="vistaAgregar" class="oculto">
+      <h1>Agregar Producto</h1>
+      <p class="subtitulo">Registra un nuevo celular en el stock</p>
+
+      <div class="card form-card">
+        <div class="grid-form">
+          <div>
+            <label>Modelo</label>
+            <input type="text" id="fNombre" placeholder="Ej: Samsung A17">
+          </div>
+          <div>
+            <label>ROM</label>
+            <input type="text" id="fRom" placeholder="Ej: 128 GB">
+          </div>
+          <div>
+            <label>RAM</label>
+            <input type="text" id="fRam" placeholder="Ej: 4 GB">
+          </div>
+          <div>
+            <label>Cámara</label>
+            <input type="text" id="fCamara" placeholder="Ej: 50 MP">
+          </div>
+          <div>
+            <label>Stock ANCASH</label>
+            <input type="number" id="fAncash" value="0" min="0">
+          </div>
+          <div>
+            <label>Stock PLAZA</label>
+            <input type="number" id="fPlaza" value="0" min="0">
+          </div>
+          <div>
+            <label>Stock REAL</label>
+            <input type="number" id="fReal" value="0" min="0">
+          </div>
+          <div>
+            <label>Stock LUZ CHILCA</label>
+            <input type="number" id="fLuzChilca" value="0" min="0">
+          </div>
+        </div>
+        <button class="btn-vender" id="btnGuardar">➕ Agregar producto</button>
+        <div id="mensajeAgregar"></div>
+        <button class="btn-vender oculto" id="btnIrAStock" style="background:#1b8a3c; margin-top:10px;">
+          📱 Ir a Stock de Celulares
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
