@@ -5,10 +5,14 @@ let adminAutenticado = false;
 
 // ---------- CATALOGO INICIAL ----------
 let contadorId = 1;
+function slugImagen(nombre) {
+  return "img/" + nombre.toLowerCase().replace(/\s+/g, "-").replace(/\//g, "-") + ".jpg";
+}
 function crear(nombre, rom, ram, camara) {
   return {
     id: "p" + (contadorId++),
     nombre, rom, ram, camara,
+    imagen: slugImagen(nombre),
     stock: { ANCASH:0, PLAZA:0, REAL:0, "LUZ CHILCA":0 }
   };
 }
@@ -86,7 +90,19 @@ const CATALOGO_INICIAL = [
 // ---------- DATOS ----------
 function cargarProductos() {
   const data = localStorage.getItem("productos");
-  if (data) return JSON.parse(data);
+  if (data) {
+    const productos = JSON.parse(data);
+    // Migración: si algún producto guardado no tiene imagen (versión anterior), se la asignamos
+    let cambiado = false;
+    productos.forEach(p => {
+      if (!p.imagen) {
+        p.imagen = slugImagen(p.nombre);
+        cambiado = true;
+      }
+    });
+    if (cambiado) guardarProductos(productos);
+    return productos;
+  }
   guardarProductos(CATALOGO_INICIAL);
   return CATALOGO_INICIAL;
 }
@@ -142,12 +158,14 @@ const clearBtn = document.getElementById("clearBtn");
 const pantallaInicial = document.getElementById("pantallaInicial");
 const pantallaBuscando = document.getElementById("pantallaBuscando");
 const resultados = document.getElementById("resultados");
+const btnVerTodos = document.getElementById("btnVerTodos");
 
 let timeoutBusqueda = null;
 
 buscarInput.addEventListener("input", () => {
   const texto = buscarInput.value.trim();
   clearBtn.classList.toggle("oculto", texto === "");
+  btnVerTodos.classList.remove("activo");
 
   if (texto === "") {
     resultados.innerHTML = "";
@@ -168,6 +186,42 @@ clearBtn.onclick = () => {
   buscarInput.value = "";
   buscarInput.dispatchEvent(new Event("input"));
 };
+
+// ---------- VER TODOS LOS MODELOS ----------
+let mostrandoTodos = false;
+
+btnVerTodos.onclick = () => {
+  mostrandoTodos = !mostrandoTodos;
+
+  if (mostrandoTodos) {
+    buscarInput.value = "";
+    clearBtn.classList.add("oculto");
+    pantallaInicial.classList.add("oculto");
+    pantallaBuscando.classList.add("oculto");
+    btnVerTodos.classList.add("activo");
+    btnVerTodos.textContent = "✕ Ocultar catálogo completo";
+    renderTodosLosModelos();
+  } else {
+    resultados.innerHTML = "";
+    pantallaInicial.classList.remove("oculto");
+    btnVerTodos.classList.remove("activo");
+    btnVerTodos.textContent = "📋 Ver todos los modelos";
+  }
+};
+
+function renderTodosLosModelos() {
+  const productos = cargarProductos();
+  const ordenados = [...productos].sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+  resultados.innerHTML = "";
+
+  const header = document.createElement("div");
+  header.className = "resultado-header";
+  header.textContent = `📋 Catálogo completo — ${ordenados.length} modelos disponibles`;
+  resultados.appendChild(header);
+
+  ordenados.forEach(p => renderCardProducto(p));
+}
 
 function renderResultados(texto) {
   pantallaBuscando.classList.add("oculto");
@@ -198,7 +252,9 @@ function renderCardProducto(p) {
   card.id = `card-${p.id}`;
 
   card.innerHTML = `
-    <div class="card-img">📱</div>
+    <div class="card-img">
+      <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.parentElement.innerHTML='📱'">
+    </div>
     <div class="card-info">
       <h3>${p.nombre}</h3>
       <p>💾 ROM: ${p.rom}</p>
@@ -290,7 +346,11 @@ function guardarStock(id) {
 
   guardarProductos(productos);
   renderTiendasResumen();
-  renderResultados(buscarInput.value.trim());
+  if (mostrandoTodos) {
+    renderTodosLosModelos();
+  } else {
+    renderResultados(buscarInput.value.trim());
+  }
 }
 
 // ---------- RESUMEN TIENDAS ----------
@@ -324,6 +384,7 @@ document.getElementById("btnGuardar").onclick = () => {
   const nuevo = {
     id: "p" + Date.now(),
     nombre, rom, ram, camara,
+    imagen: slugImagen(nombre),
     stock: {
       ANCASH: parseInt(document.getElementById("fAncash").value) || 0,
       PLAZA: parseInt(document.getElementById("fPlaza").value) || 0,
